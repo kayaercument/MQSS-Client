@@ -30,7 +30,8 @@
 using namespace mqss::client;
 // GCOVR_EXCL_START
 MQSSClient::MQSSClient(const std::string& token,
-                       const std::string& url_or_queue, bool is_hpc) {
+                       const std::string& url_or_queue, bool is_hpc)
+    : mIsHpc(is_hpc) {
   if (is_hpc) {
     mClient = std::make_unique<MQSSHPCClient>(token, url_or_queue);
   } else {
@@ -67,7 +68,7 @@ MQSSClient::getResourceInfo(const std::string& resource) const {
 }
 std::optional<std::string> MQSSClient::submitJob(JobRequest& job) {
   std::string path = job.getPath();
-  std::string result = mClient->post(path, job.toJson());
+  std::string result = mClient->post(path, job.toJson(mIsHpc));
   if (result.empty() || !nlohmann::json::accept(result))
     return std::nullopt;
 

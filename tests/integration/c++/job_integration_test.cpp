@@ -29,7 +29,7 @@
 
 #define MQSS_HPC_QUEUENAME std::getenv("MQSS_HPC_QUEUENAME")
 #define MQSS_API_TOKEN std::getenv("MQSS_API_TOKEN")
-#define MQSS_API_URL "https://portal-test.quantum.lrz.de:4000/v1"
+#define MQSS_API_URL "https://portal.quantum.lrz.de:4000/v1/"
 
 struct ClientCtorParam {
   std::string token;
