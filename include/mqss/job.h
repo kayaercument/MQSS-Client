@@ -31,7 +31,7 @@ private:
 
 public:
   virtual ~JobRequest() = default;
-  virtual nlohmann::json toJson() const = 0;
+  virtual nlohmann::json toJson(bool isHpc) const = 0;
   virtual std::string getPath() const = 0;
   std::string getUuid() const { return mUuid; }
   void setUuid(const std::string& uuid) { mUuid = uuid; }
@@ -70,7 +70,7 @@ public:
   void setQueued(bool queued) { mQueued = queued; }
   bool isQueued() const { return mQueued; }
 
-  nlohmann::json toJson() const;
+  nlohmann::json toJson(bool isHpc) const;
 
   std::string getPath() const { return "job"; }
 };
@@ -102,7 +102,7 @@ public:
   }
   std::string getCoefficientsString() const { return mCoefficientsStr; }
 
-  nlohmann::json toJson() const;
+  nlohmann::json toJson(bool isHpc) const;
 
   std::string getPath() const { return "hamiltonian_job"; }
 };
