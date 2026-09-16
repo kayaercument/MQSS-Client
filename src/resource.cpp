@@ -159,7 +159,9 @@ Resource::Resource(std::string name, unsigned qubitCount, bool online,
 Resource::Resource(const nlohmann::json& json) {
 
   std::string name = json.value("name", "");
-  unsigned qubitCount = json.value("qubits", 0);
+  unsigned qubitCount = json.contains("qubits") && json["qubits"].is_number()
+                            ? json["qubits"].get<unsigned>()
+                            : 0;
   bool online = json.value("online", false);
 
   std::vector<std::vector<int>> couplingMap =
